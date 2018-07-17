@@ -21,5 +21,7 @@ It is recommended to store the script in /usr/local/bin to make the script globa
 
 
 Issues:
-No known issues for now.
+The script can only handle a filename as an argument, not paths.
+Ex. Can't handle rename-file-to-exif /home/pi/my_pic.jpg as the script
+will treat /home/pi/my_pic.jpg as a filename.
 
