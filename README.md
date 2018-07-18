@@ -20,8 +20,19 @@ ex. ls | grep [Jj][Pp][Gg]$ | while read f ; do ./rename-file-to-exif $"f" ; don
 It is recommended to store the script in /usr/local/bin to make the script global.
 
 
+master:
+
 Issues:
 The script can only handle a filename as an argument, not paths.
 Ex. Can't handle rename-file-to-exif /home/pi/my_pic.jpg as the script
 will treat /home/pi/my_pic.jpg as a filename.
+
+
+development:
+
+Can handle absolute path to file as an argument to the script.
+
+TODO:
+
+* Add support for relative path to file as argument to the script.
 
