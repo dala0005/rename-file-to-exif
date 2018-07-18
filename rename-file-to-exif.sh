@@ -29,6 +29,7 @@ if [[ ${1:0:1} == '/' ]] ; then
 
 else
    filename="$1"
+   path=$(pwd)'/'
 fi
 
 # check if dynamic path
@@ -56,8 +57,6 @@ if ! [[ $filename_extend =~ [Jj][Pp][Gg]$ ]] ; then
   exit 0
 fi
 
-
-path=$(pwd)'/'
 command="identify -verbose $path\"$filename\" | grep \"exif:DateTimeOriginal:\""
 
 year=""
