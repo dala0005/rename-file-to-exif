@@ -1,5 +1,7 @@
 #!/bin/bash
 
+filename=""
+path=""
 # check if script has argument
 
 if [ -z "$1" ] ; then
@@ -7,7 +9,33 @@ if [ -z "$1" ] ; then
    exit 0
 fi
 
-filename="$1"
+# get path to file
+
+# check if absolut path
+if [[ ${1:0:1} == '/' ]] ; then
+   # get last '/' in the path to separate path and filename
+
+   argument_len=${#1} # get lenth of argument
+
+   # search for last '/' in argument starting with last character
+   for path_index in `seq $argument_len -1 0`;
+   do
+      if [[ ${1:$path_index:1} == '/' ]] ; then # finding last '/'
+         filename=${1:$path_index+1:$argument_len}  # store filename
+         path=${1:0:$(($argument_len - ${#filename}))} # store path
+         break
+      fi
+   done
+
+else
+   filename="$1"
+fi
+
+# check if dynamic path
+#if [[ ${1:0:3} == '../' ]] ; then
+#  echo "dynamic path!"
+#   exit 0
+#fi
 
 # check if filename already have right format
 if [[ $filename =~ ^[0-9]{8}_[0-9]{6} ]] ; then
