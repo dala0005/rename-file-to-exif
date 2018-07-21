@@ -46,7 +46,7 @@ filename_extend=${filename:filename_len-3:3}
 
 
 if ! [[ $filename_extend =~ [Jj][Pp][Gg]$ ]] ; then
-  echo "File: $file in path: $path has not extension [Jj][Pp][Gg]$ - file will be ignored"
+  echo "File: $filename in path: $path has not extension [Jj][Pp][Gg]$ - file will be ignored"
   exit 0
 fi
 
