@@ -11,36 +11,30 @@ fi
 
 # get path to file
 
-# check if absolut path
+# check if absolut path or relative path
 if [[ ${1:0:1} == '/' ]] ; then
-   # get last '/' in the path to separate path and filename
+   # store path and filename in $path
+   path=${1:0:${#1}}
 
-   argument_len=${#1} # get lenth of argument
-
-   # search for last '/' in argument starting with last character
-   for path_index in `seq $argument_len -1 0`;
-   do
-      if [[ ${1:$path_index:1} == '/' ]] ; then # finding last '/'
-         filename=${1:$path_index+1:$argument_len}  # store filename
-         path=${1:0:$(($argument_len - ${#filename}))} # store path
-         break
-      fi
-   done
-
+# if relative
 else
-   filename="$1"
-   path=$(pwd)'/'
+  path=$(pwd)'/'${1:0:${#1}} # add 
 fi
 
-# check if dynamic path
-#if [[ ${1:0:3} == '../' ]] ; then
-#  echo "dynamic path!"
-#   exit 0
-#fi
+# separate path and filename
+
+for path_index in `seq ${#path} -1 0`;
+do
+  if [[ ${path:$path_index:1} == '/'  ]] ; then # finding last '/'
+       filename=${path:$(($path_index+1)):${#path}}
+       path=${path:0:$((${#path} - ${#filename}))}
+       break
+  fi
+done
 
 # check if filename already have right format
 if [[ $filename =~ ^[0-9]{8}_[0-9]{6} ]] ; then
-   echo "No modifying on filename: $filename - already in right format"
+   echo "No modifying on filename: $filename in path: $path - already in right format"
    exit 0
 fi
 
@@ -52,8 +46,7 @@ filename_extend=${filename:filename_len-3:3}
 
 
 if ! [[ $filename_extend =~ [Jj][Pp][Gg]$ ]] ; then
-  echo "Error: file extension has not [Jj][Pp][Gg]$"
-  echo "The script will now quit"
+  echo "File: $file in path: $path has not extension [Jj][Pp][Gg]$ - file will be ignored"
   exit 0
 fi
 
