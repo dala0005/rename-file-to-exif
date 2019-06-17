@@ -15,7 +15,7 @@ The script takes one file at a time as an argument.
 ex: ./rename-file-to-exif [your file]
 
 If you have many files to rename, you can put the script in a loop.
-ex. ls | grep [Jj][Pp][Gg]$ | while read f ; do ./rename-file-to-exif $"f" ; done
+ex. ls | grep [Jj][Pp][Gg]$ | while read f ; do ./rename-file-to-exif "$f" ; done
 
 It is recommended to store the script in /usr/local/bin to make the script global.
 
